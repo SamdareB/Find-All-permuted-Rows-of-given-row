@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+#define MAX 100
+using namespace std;
+
+//Function to find the all permutation of give row number
+void findPermutedRows(int mat[][MAX], int m, int n, int r){
+	unordered_set<int>s;
+	for(int j = 0;j<n;j++){
+		//insert the given row elements into set.
+		s.insert(mat[r][j]);
+	}
+	//traverse each row 
+	for(int i =0;i<m;i++){
+		//ignore the elements from given row number.
+		if(i==r)
+		continue;
+		int j;
+		for(j =0;j<n;j++)
+			//check whether the current element from current row is already present in set or not
+			//if it is not present then break the loop and move to next row.
+			if(s.find(mat[i][j])== s.end())
+			break;
+		
+		//keep matching to the elements of given row which is inserted into set
+		//till last element of current row.
+		if(j!= n)
+		continue;
+		//if we found all the lements in current row then print the index of current row.
+		cout<<i<<" ";
+	}
+}
+
+int main() {
+	// your code goes here
+	int m, n, r;
+	cin>>m>>n>>r;
+	int mat[MAX][MAX];
+	for(int i =0;i<m;i++){
+		for(int j =0;j<n;j++){
+			cin>>mat[i][j];
+		}
+	}
+	findPermutedRows(mat, m, n, r);
+	return 0;
+}
+//Time complexity:O(m*n)
+//Space complexity:O(n)
+//Another solution using liberary function in STL
+/*
+void findPermutedRows(int mat[][MAX], int m, int n, int r){
+	for(int i =0;i<m&&i!= r;i++){
+		if(is_permutaion(mat[i], mat[i]+n, mat[r])
+		cout<<i<<" ";
+	}
+}
+*/
+//Time complexity:O(m*n)
+//Space complexity:O(1)
